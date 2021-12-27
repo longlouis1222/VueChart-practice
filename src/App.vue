@@ -1,28 +1,87 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <el-container>
+    <SideBar />
+    <Header />
+    <el-container class="body">
+      <router-view />
+    </el-container>
+  </el-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SideBar from "./components/Sidebar.vue";
+import Header from "./components/Header.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    SideBar,
+    Header,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+  created() {},
+  mounted() {},
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.body {
+  margin: 70px 10px 10px 210px;
+  border-radius: 5px;
+  box-shadow: 1px 2px 5px 5px #d3dce6;
+}
+.box-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 35px 20px;
+  width: 100%;
+  height: 100%;
+}
+.el-header {
+  background-color: #b3c0d1;
+  color: #333;
+  line-height: 60px;
+}
+.el-aside {
+  color: #333;
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #fff;
+  box-shadow: 1px 2px 5px 5px #d3dce6;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  background-color: #f9fafc;
+}
+.small {
+  max-width: 600px;
+  margin: 150px auto;
+}
+.bg-gradient {
+  background-image: linear-gradient(lightblue, #fff);
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>
