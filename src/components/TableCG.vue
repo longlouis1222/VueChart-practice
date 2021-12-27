@@ -99,7 +99,7 @@ export default {
       return resData;
     },
     getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1) + 5);
+      return Math.floor(Math.random() * (150 - 5 + 1) + 5);
     },
   },
   async created() {
