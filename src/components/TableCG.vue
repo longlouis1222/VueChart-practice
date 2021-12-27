@@ -61,17 +61,17 @@ export default {
     fn_formatDatetime(m) {
       m = new Date(m);
       const dateTimeString =
-        m.getUTCFullYear() +
+        m.getFullYear() +
         "/" +
-        ("0" + (m.getUTCMonth() + 1)).slice(-2) +
+        ("0" + (m.getMonth() + 1)).slice(-2) +
         "/" +
-        ("0" + m.getUTCDate()).slice(-2) +
+        ("0" + m.getDate()).slice(-2) +
         " " +
-        ("0" + m.getUTCHours()).slice(-2) +
+        ("0" + m.getHours()).slice(-2) +
         ":" +
-        ("0" + m.getUTCMinutes()).slice(-2) +
+        ("0" + m.getMinutes()).slice(-2) +
         ":" +
-        ("0" + m.getUTCSeconds()).slice(-2);
+        ("0" + m.getSeconds()).slice(-2);
       return dateTimeString;
     },
     async fn_getData() {
