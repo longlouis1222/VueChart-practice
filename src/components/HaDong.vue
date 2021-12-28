@@ -1,7 +1,7 @@
 <template>
   <el-main class="p-4">
-    <el-row :gutter="20">
-      <el-col :span="10">
+    <el-row :gutter="25">
+      <el-col :span="8">
         <div class="grid-content bg-purple box-container">
           <div>
             <p style="font-size: 18px">TDS hiện tại</p>
@@ -20,7 +20,27 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="12" :offset="2">
+      <el-col :span="7">
+        <ul style="list-style: none">
+          <li class="fcenter mb-1">
+            <div class="icon-info icon-blue"></div>
+            <p class="mb-0">0-50: Nước lý tưởng</p>
+          </li>
+          <li class="fcenter mb-1">
+            <div class="icon-info icon-green"></div>
+            <p class="mb-0">50-175: Nước sạch</p>
+          </li>
+          <li class="fcenter mb-1">
+            <div class="icon-info icon-yellow"></div>
+            <p class="mb-0">175-400: Nước dùng sinh hoạt</p>
+          </li>
+          <li class="fcenter mb-1">
+            <div class="icon-info icon-red"></div>
+            <p class="mb-0">>= 400: Nước ô nhiễm, không sử dụng</p>
+          </li>
+        </ul>
+      </el-col>
+      <el-col :span="9">
         <div class="grid-content bg-purple p-1">
           <p align="center">Thống kê dữ liệu</p>
           <el-form

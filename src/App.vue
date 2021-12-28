@@ -72,6 +72,29 @@ export default {
 .bg-gradient {
   background-image: linear-gradient(lightblue, #fff);
 }
+.fcenter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.icon-info {
+  width: 15px;
+  height: 15px;
+  box-shadow: 1px 1px 4px 1px #545454e3;
+  margin-right: 5px;
+}
+.icon-blue {
+  background-color: blue;
+}
+.icon-green {
+  background-color: green;
+}
+.icon-yellow {
+  background-color: yellow;
+}
+.icon-red {
+  background-color: red;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }
