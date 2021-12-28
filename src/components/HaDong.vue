@@ -8,9 +8,9 @@
             <span style="font-size: 35px"
               >[
               <countTo
-                :startVal="startVal"
-                :endVal="endVal"
-                :duration="10000"
+                :startVal="countConfig.startVal"
+                :endVal="countConfig.endVal"
+                :duration="countConfig.timeDuration"
               ></countTo>
               ] PPM</span
             >
@@ -99,113 +99,15 @@
 <script>
 import LineChart from "./LineChart";
 import countTo from "vue-count-to";
-
+import { dataChartMixins } from "../mixins/dataChartMixins";
+import { fnMixins } from "../mixins/fnMixins";
 export default {
   components: {
     LineChart,
     countTo,
   },
-  data() {
-    const item = {
-      date: "2016-05-02",
-      name: "Tom",
-      address: "No. 189, Grove St, Los Angeles",
-    };
-    return {
-      startVal: 0,
-      endVal: null,
-      tableData: Array(20).fill(item),
-      data: null,
-      options: null,
-      gradient: "rgba(255, 0,0, 0.25)",
-      gradient2: "rgba(0, 231, 255, 0.25)",
-      mData: {
-        listDate: [],
-        listDataRd2: [],
-        countConfig: {
-          startVal: 0,
-          endVal: 33,
-          timeDuration: 1500,
-        },
-      },
-      ruleForm: {
-        date1: "",
-        date2: "",
-      },
-      rules: {
-        date1: [
-          {
-            type: "date",
-            required: true,
-            message: "Please pick a date",
-            trigger: "change",
-          },
-        ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "Please pick a time",
-            trigger: "change",
-          },
-        ],
-      },
-    };
-  },
+  mixins: [dataChartMixins, fnMixins],
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    fn_getListDate(startDate, endDate, steps = 1) {
-      const dateArray = [];
-      let currentDate = new Date(startDate);
-      let dateLimit = new Date(endDate);
-      while (currentDate <= dateLimit) {
-        dateArray.push(new Date(currentDate));
-        // Use UTC date to prevent problems with time zones and DST
-        currentDate.setUTCDate(currentDate.getUTCDate() + steps);
-      }
-      return dateArray;
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.listDate = this.fn_getListDate(
-            this.ruleForm.date1,
-            this.ruleForm.date2
-          );
-          this.listDate = this.listDate.map((item) => {
-            return this.fn_formatDate(item);
-          });
-          this.fn_getDataRd();
-          this.fillData();
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    fn_formatDate(date) {
-      date = new Date(date);
-      date.setDate(date.getDate() + 1);
-      const dateString =
-        date.getUTCFullYear() +
-        "/" +
-        ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-        "/" +
-        ("0" + date.getUTCDate()).slice(-2);
-      return dateString;
-    },
-    fn_getDataRd() {
-      this.mData.listDataRd2 = [];
-      for (let i = 0; i < this.listDate.length; i++) {
-        let num2 = this.getRandomInt();
-        this.mData.listDataRd2.push(num2);
-      }
-    },
     fillData() {
       if (!this.listDate) {
         this.data = {
@@ -260,17 +162,12 @@ export default {
         };
       }
     },
-    getRandomInt() {
-      return Math.floor(Math.random() * (150 - 5 + 1) + 5);
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
   },
   created() {
-    this.endVal = this.getRandomInt();
+    this.countConfig.endVal = this.getRandomInt();
   },
   mounted() {
+    this.loadingInstance.close();
     this.fillData();
   },
 };

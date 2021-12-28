@@ -8,9 +8,9 @@
             <span style="font-size: 35px"
               >[
               <countTo
-                :startVal="startVal"
-                :endVal="endVal"
-                :duration="10000"
+                :startVal="countConfig.startVal"
+                :endVal="countConfig.endVal"
+                :duration="countConfig.timeDuration"
               ></countTo>
               ] PPM</span
             >
@@ -99,139 +99,16 @@
 <script>
 import LineChart from "./LineChart";
 import countTo from "vue-count-to";
-import { Loading } from "element-ui";
 import axios from "axios";
+import { dataChartMixins } from "../mixins/dataChartMixins";
+import { fnMixins } from "../mixins/fnMixins";
 export default {
   components: {
     LineChart,
     countTo,
   },
-  data() {
-    const item = {
-      date: "2016-05-02",
-      name: "Tom",
-      address: "No. 189, Grove St, Los Angeles",
-    };
-    return {
-      loading: false,
-      loadingInstance: Loading.service({
-        fullscreen: true,
-        background: "rgba(0, 0, 0, 0.2)",
-      }),
-      dataFetch: [],
-      startVal: 0,
-      endVal: null,
-      tableData: Array(20).fill(item),
-      data: null,
-      options: null,
-      gradient: "rgba(255, 0,0, 0.25)",
-      gradient2: "rgba(0, 231, 255, 0.25)",
-      mData: {
-        listDate: [],
-        listDataRd1: [],
-        listDateTime: [],
-        listDataFetch: [],
-        countConfig: {
-          startVal: 0,
-          endVal: 33,
-          timeDuration: 1500,
-        },
-      },
-      ruleForm: {
-        date1: "",
-        date2: "",
-      },
-      rules: {
-        date1: [
-          {
-            type: "date",
-            required: true,
-            message: "Please pick a date",
-            trigger: "change",
-          },
-        ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "Please pick a time",
-            trigger: "change",
-          },
-        ],
-      },
-    };
-  },
+  mixins: [dataChartMixins, fnMixins],
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    fn_getListDate(startDate, endDate, steps = 1) {
-      const dateArray = [];
-      let currentDate = new Date(startDate);
-      let dateLimit = new Date(endDate);
-      while (currentDate <= dateLimit) {
-        dateArray.push(new Date(currentDate));
-        // Use UTC date to prevent problems with time zones and DST
-        currentDate.setUTCDate(currentDate.getUTCDate() + steps);
-      }
-      return dateArray;
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.listDate = this.fn_getListDate(
-            this.ruleForm.date1,
-            this.ruleForm.date2
-          );
-          this.listDate = this.listDate.map((item) => {
-            return this.fn_formatDate(item);
-          });
-          this.fn_getDataRd();
-          this.fillData();
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    fn_formatDate(date) {
-      date = new Date(date);
-      date.setDate(date.getDate() + 1);
-      const dateString =
-        date.getUTCFullYear() +
-        "/" +
-        ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-        "/" +
-        ("0" + date.getUTCDate()).slice(-2);
-      return dateString;
-    },
-    fn_formatDatetime(m) {
-      m = new Date(m);
-      const dateTimeString =
-        m.getFullYear() +
-        "/" +
-        ("0" + (m.getMonth() + 1)).slice(-2) +
-        "/" +
-        ("0" + m.getDate()).slice(-2) +
-        " " +
-        ("0" + m.getHours()).slice(-2) +
-        ":" +
-        ("0" + m.getMinutes()).slice(-2) +
-        ":" +
-        ("0" + m.getSeconds()).slice(-2);
-      console.log(dateTimeString);
-      return dateTimeString;
-    },
-    fn_getDataRd() {
-      this.mData.listDataRd1 = [];
-      for (let i = 0; i < this.listDate.length; i++) {
-        let num1 = this.getRandomInt();
-        this.mData.listDataRd1.push(num1);
-      }
-    },
     fillData() {
       if (!this.listDate) {
         this.data = {
@@ -275,7 +152,7 @@ export default {
     },
     async fn_getData() {
       await axios
-        .get(`https://chatluongnuoc.herokuapp.com/`)
+        .get(`https://chatluongnuoc.herokuapp.com/api/tds/cầu giấy`)
         .then((response) => {
           this.dataFetch = response.data;
         })
@@ -294,19 +171,12 @@ export default {
         return item.value;
       });
     },
-    getRandomInt() {
-      return Math.floor(Math.random() * (150 - 5 + 1) + 5);
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
   },
-  created() {
-    this.endVal = this.getRandomInt();
-  },
+  created() {},
   async mounted() {
     await this.fn_getData();
     if (this.dataFetch) {
+      this.countConfig.endVal = this.dataFetch[this.dataFetch.length - 1].value;
       this.loadingInstance.close();
     }
     await this.fillData();

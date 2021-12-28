@@ -27,56 +27,18 @@
   </el-main>
 </template>
 <script>
-import { Loading } from "element-ui";
 import axios from "axios";
+import { fnMixins } from "../mixins/fnMixins";
+import { tableMixins } from "../mixins/tableMixins";
 export default {
-  data() {
-    return {
-      loadingInstance: Loading.service({
-        fullscreen: true,
-        background: "rgba(0, 0, 0, 0.2)",
-      }),
-      tableData: [],
-      dataFetch: [],
-      mData: {
-        listDataFetch: [],
-        listDateTime: [],
-      },
-    };
-  },
+  mixins: [tableMixins, fnMixins],
   methods: {
     fn_initTable() {
       this.tableData = this.dataFetch;
     },
-    fn_formatDate(date) {
-      date = new Date(date);
-      const dateString =
-        date.getUTCFullYear() +
-        "/" +
-        ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-        "/" +
-        ("0" + date.getUTCDate()).slice(-2);
-      return dateString;
-    },
-    fn_formatDatetime(m) {
-      m = new Date(m);
-      const dateTimeString =
-        m.getFullYear() +
-        "/" +
-        ("0" + (m.getMonth() + 1)).slice(-2) +
-        "/" +
-        ("0" + m.getDate()).slice(-2) +
-        " " +
-        ("0" + m.getHours()).slice(-2) +
-        ":" +
-        ("0" + m.getMinutes()).slice(-2) +
-        ":" +
-        ("0" + m.getSeconds()).slice(-2);
-      return dateTimeString;
-    },
     async fn_getData() {
       await axios
-        .get(`https://chatluongnuoc.herokuapp.com/`)
+        .get(`https://chatluongnuoc.herokuapp.com/api/tds/cầu giấy`)
         .then((response) => {
           this.dataFetch = response.data;
         })
@@ -97,9 +59,6 @@ export default {
         }
       });
       return resData;
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (150 - 5 + 1) + 5);
     },
   },
   async created() {

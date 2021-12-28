@@ -24,12 +24,10 @@
   </el-main>
 </template>
 <script>
+import { fnMixins } from "../mixins/fnMixins";
+import { tableMixins } from "../mixins/tableMixins";
 export default {
-  data() {
-    return {
-      tableData: [],
-    };
-  },
+  mixins: [tableMixins, fnMixins],
   methods: {
     fn_initTable() {
       let n = new Date("2020-12-31");
@@ -44,22 +42,10 @@ export default {
         this.tableData.push(o);
       }
     },
-    fn_formatDate(date) {
-      date = new Date(date);
-      const dateString =
-        date.getUTCFullYear() +
-        "/" +
-        ("0" + (date.getUTCMonth() + 1)).slice(-2) +
-        "/" +
-        ("0" + date.getUTCDate()).slice(-2);
-      return dateString;
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (150 - 5 + 1) + 5);
-    },
   },
   created() {
     this.fn_initTable();
+    this.loadingInstance.close();
   },
 };
 </script>

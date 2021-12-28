@@ -5,15 +5,7 @@
         <div class="grid-content bg-purple box-container">
           <div>
             <p style="font-size: 18px">TDS hiện tại</p>
-            <span style="font-size: 35px"
-              >[
-              <countTo
-                :startVal="startVal"
-                :endVal="endVal"
-                :duration="10000"
-              ></countTo>
-              ] PPM</span
-            >
+            <span style="font-size: 35px">[ ... ] PPM</span>
           </div>
           <div>
             <i class="el-icon-data-line" style="font-size: xxx-large"></i>
@@ -97,67 +89,23 @@
 </template>
 <script>
 import LineChart from "../components/LineChart";
-import countTo from "vue-count-to";
+// import countTo from "vue-count-to";
+import { dataChartMixins } from "../mixins/dataChartMixins";
 export default {
   components: {
     LineChart,
-    countTo,
+    // countTo,
   },
+  mixins: [dataChartMixins],
   data() {
-    const item = {
-      date: "2016-05-02",
-      name: "Tom",
-      address: "No. 189, Grove St, Los Angeles",
-    };
     return {
-      startVal: 0,
-      endVal: null,
-      tableData: Array(20).fill(item),
-      data: null,
-      options: null,
-      gradient: "rgba(255, 0,0, 0.25)",
-      gradient2: "rgba(0, 231, 255, 0.25)",
-      mData: {
-        listDate: [],
-        listDataRd1: [],
-        listDataRd2: [],
-        countConfig: {
-          startVal: 0,
-          endVal: 33,
-          timeDuration: 1500,
-        },
-      },
-      ruleForm: {
-        date1: "",
-        date2: "",
-      },
-      rules: {
-        date1: [
-          {
-            type: "date",
-            required: true,
-            message: "Please pick a date",
-            trigger: "change",
-          },
-        ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "Please pick a time",
-            trigger: "change",
-          },
-        ],
+      countConfig: {
+        startVal: 0,
+        endVal: "...",
       },
     };
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
     fn_getListDate(startDate, endDate, steps = 1) {
       const dateArray = [];
       let currentDate = new Date(startDate);
@@ -283,9 +231,10 @@ export default {
     },
   },
   created() {
-    this.endVal = this.getRandomInt();
+    // this.endVal = this.getRandomInt();
   },
   mounted() {
+    this.loadingInstance.close();
     this.fillData();
   },
 };
