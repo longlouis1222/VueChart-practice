@@ -38,18 +38,33 @@ export const fnMixins = {
         ("0" + m.getSeconds()).slice(-2);
       return dateTimeString;
     },
+    fn_getDataFilter() {
+      const startDate = this.ruleForm.date1.getTime();
+      const endDate = new Date(this.ruleForm.date2).setHours(23, 59, 59);
+      this.mData.listDateTime = [];
+      this.mData.listDataFetch = [];
+      this.dataFetch.forEach((item) => {
+        const date = new Date(item.time).getTime();
+        if (date >= startDate && date <= endDate) {
+          item.time = this.fn_formatDatetime(item.time);
+          this.mData.listDateTime.push(item.time);
+          this.mData.listDataFetch.push(item.value);
+        }
+      });
+    },
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          this.listDate = this.fn_getListDate(
-            this.ruleForm.date1,
-            this.ruleForm.date2
-          );
-          this.listDate = this.listDate.map((item) => {
-            return this.fn_formatDate(item);
-          });
-          this.fn_getDataRd();
-          this.fillData();
+          // this.listDate = this.fn_getListDate(
+          //   this.ruleForm.date1,
+          //   this.ruleForm.date2
+          // );
+          // this.listDate = this.listDate.map((item) => {
+          //   return this.fn_formatDate(item);
+          // });
+          // this.fn_getDataRd();
+          await this.fn_getDataFilter();
+          await this.fillData();
         } else {
           console.log("error submit!!");
           return false;

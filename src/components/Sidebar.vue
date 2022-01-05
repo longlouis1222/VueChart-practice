@@ -1,15 +1,15 @@
 <template>
   <el-aside
-    width="15%"
     class="border"
     style="
       position: fixed;
       top: 55px;
       left: 0;
       background-image: linear-gradient(-180deg, lightblue 30%, #fff 70%);
-      overflow-x: hidden;
+      width: 210px;
       height: 100vh;
-      z-index: 99;
+      overflow-x: hidden;
+      z-index: 98;
     "
   >
     <el-menu
@@ -25,11 +25,14 @@
           ><i class="el-icon-location-information"></i>Giám sát</template
         >
         <el-menu-item-group>
-          <el-menu-item index="1-1" :route="{ name: 'home' }">
+          <!-- <el-menu-item index="1-1" :route="{ name: 'home' }">
             Tổng quan</el-menu-item
-          >
-          <el-menu-item index="1-2" :route="{ name: 'caugiay' }">
+          > -->
+          <el-menu-item index="1-1" :route="{ name: 'caugiay' }">
             Cầu Giấy</el-menu-item
+          >
+          <el-menu-item index="1-2" :route="{ name: 'dongda' }"
+            >Đống Đa</el-menu-item
           >
           <el-menu-item index="1-3" :route="{ name: 'hadong' }"
             >Hà Đông</el-menu-item
@@ -42,7 +45,10 @@
           <el-menu-item index="2-1" :route="{ name: 'caugiayDetail' }"
             >Thống kê tại Cầu Giấy</el-menu-item
           >
-          <el-menu-item index="2-2" :route="{ name: 'hadongDetail' }"
+          <el-menu-item index="2-2" :route="{ name: 'dongdaDetail' }"
+            >Thống kê tại Đống Đa</el-menu-item
+          >
+          <el-menu-item index="2-3" :route="{ name: 'hadongDetail' }"
             >Thống kê tại Hà Đông</el-menu-item
           >
         </el-menu-item-group>

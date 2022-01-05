@@ -115,12 +115,12 @@ export default {
           labels: this.mData.listDateTime,
           datasets: [
             {
-              label: "Cầu Giấy",
-              borderColor: "#FC2525",
+              label: "Đống Đa",
+              borderColor: "lightgreen",
               pointBackgroundColor: "white",
               borderWidth: 1,
-              pointBorderColor: "#FC2525",
-              backgroundColor: this.gradient,
+              pointBorderColor: "lightgreen",
+              backgroundColor: "rgba(25,135,84,0.25)",
               data: this.mData.listDataFetch,
             },
           ],
@@ -134,7 +134,7 @@ export default {
           labels: this.listDate,
           datasets: [
             {
-              label: "Cầu Giấy",
+              label: "Đống Đa",
               borderColor: "#FC2525",
               pointBackgroundColor: "white",
               borderWidth: 1,
@@ -152,7 +152,7 @@ export default {
     },
     async fn_getData() {
       await axios
-        .get(`https://chatluongnuoc.herokuapp.com/api/tds/cầu giấy`)
+        .get(`https://chatluongnuoc.herokuapp.com/api/tds/đống đa`)
         .then((response) => {
           this.dataFetch = response.data;
         })

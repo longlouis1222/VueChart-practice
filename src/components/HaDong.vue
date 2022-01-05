@@ -1,5 +1,5 @@
 <template>
-  <el-main class="p-4">
+  <el-main class="body-container p-4">
     <el-row :gutter="25">
       <el-col :span="8">
         <div class="grid-content bg-purple box-container">

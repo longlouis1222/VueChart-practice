@@ -1,10 +1,10 @@
 <template>
-  <el-main style="height: 100vh; border: 1px solid #eee" class="p-4">
+  <el-main class="body-container p-4">
     <p>Bảng chỉ số TDS tại Hà Đông</p>
     <el-table
       :data="tableData"
       border
-      height="80%"
+      height="83%"
       style="width: 100%; box-shadow: 1px 2px 5px 5px #bebebe"
     >
       <el-table-column prop="id" label="ID" width="180" align="center">

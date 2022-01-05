@@ -1,9 +1,11 @@
 <template>
   <el-container>
-    <SideBar />
     <Header />
-    <el-container class="body">
-      <router-view />
+    <el-container>
+      <SideBar />
+      <el-container class="body">
+        <router-view />
+      </el-container>
     </el-container>
   </el-container>
 </template>
@@ -28,9 +30,16 @@ export default {
 
 <style>
 .body {
-  margin: 70px 10px 10px 210px;
+  position: absolute;
+  top: 60px;
+  left: 210px;
+  margin: 10px;
+  width: calc(100vw - 230px);
   border-radius: 5px;
   box-shadow: 1px 2px 5px 5px #d3dce6;
+}
+.body-container {
+  height: calc(100vh - 80px);
 }
 .box-container {
   display: flex;

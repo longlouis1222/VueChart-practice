@@ -1,6 +1,6 @@
 <template>
   <el-main class="body-container p-4">
-    <p>Bảng chỉ số TDS tại Cầu Giấy</p>
+    <p>Bảng chỉ số TDS tại Đống Đa</p>
     <el-table
       :data="tableData"
       border
@@ -38,7 +38,7 @@ export default {
     },
     async fn_getData() {
       await axios
-        .get(`https://chatluongnuoc.herokuapp.com/api/tds/cầu giấy`)
+        .get(`https://chatluongnuoc.herokuapp.com/api/tds/đống đa`)
         .then((response) => {
           this.dataFetch = response.data;
         })
@@ -54,8 +54,8 @@ export default {
         if (item.time) {
           item.time = this.fn_formatDatetime(item.time);
         }
-        if (item.location == "cầu giấy") {
-          item.location = "Cầu Giấy";
+        if (item.location == "đống đa") {
+          item.location = "Đống Đa";
         }
       });
       return resData;
