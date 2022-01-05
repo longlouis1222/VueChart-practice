@@ -42,7 +42,7 @@
             label-width="120px"
           >
             <b-row>
-              <b-col md="8">
+              <b-col md="9">
                 <el-form-item
                   label="Từ ngày"
                   style="text-align: center; font-size: 18px"
@@ -67,7 +67,10 @@
                 </el-form-item>
               </b-col>
               <b-col class="md-4 mt-4">
-                <el-button type="primary" @click="submitForm('ruleForm')"
+                <el-button
+                  type="primary"
+                  size="small"
+                  @click="submitForm('ruleForm')"
                   >Search</el-button
                 >
               </b-col>
