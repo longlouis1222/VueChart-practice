@@ -9,7 +9,7 @@
     "
   >
     <h1>Welcome to Water Quality Moniter !!!</h1>
-    <img src="../../../pngegg.png" alt="picture" style="width: 40%" />
+    <img src="pngegg.png" alt="picture" style="width: 40%" />
     <!-- <el-row :gutter="25">
       <el-col :span="8">
         <div class="grid-content bg-purple box-container">
