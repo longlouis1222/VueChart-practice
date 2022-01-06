@@ -1,6 +1,16 @@
 <template>
-  <el-main class="body-container p-4">
-    <el-row :gutter="25">
+  <el-main
+    class="body-container p-4"
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: linear-gradient(352deg, lightblue, #fff);
+    "
+  >
+    <h1>Welcome to Water Quality Moniter !!!</h1>
+    <img src="../../../pngegg.png" alt="picture" style="width: 40%" />
+    <!-- <el-row :gutter="25">
       <el-col :span="8">
         <div class="grid-content bg-purple box-container">
           <div>
@@ -87,16 +97,16 @@
           :options="options"
         ></line-chart>
       </div>
-    </b-row>
+    </b-row> -->
   </el-main>
 </template>
 <script>
-import LineChart from "../components/LineChart";
+// import LineChart from "../components/LineChart";
 // import countTo from "vue-count-to";
 import { dataChartMixins } from "../mixins/dataChartMixins";
 export default {
   components: {
-    LineChart,
+    // LineChart,
     // countTo,
   },
   mixins: [dataChartMixins],
